@@ -6,9 +6,8 @@ public:
     for(int i=0; i<strs[0].size(); i++){
         count=0;
         for(int j=1; j<strs.size(); j++){
-            if(strs[j][i]==strs[0][i])
-                count++;
-            else
+            if(strs[j][i]!=strs[0][i])
+             
                 return s;
         }
         s+=strs[0][i];
