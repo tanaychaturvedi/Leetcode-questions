@@ -4,7 +4,7 @@ public:
         unordered_map<int, int>  abSum;
         for(auto a : A) {
             for(auto b : B) {
-                ++abSum[a+b];
+                abSum[a+b]++;
             }
         }
         int count = 0;
