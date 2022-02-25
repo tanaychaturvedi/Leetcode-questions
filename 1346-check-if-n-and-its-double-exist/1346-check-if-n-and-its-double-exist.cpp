@@ -1,16 +1,32 @@
 class Solution {
-public:
-    bool checkIfExist(vector<int>& arr) {
-       int n=arr.size();
+    
+    int binarys(int n,int l, int h, vector<int> &a) {
         
-        for(int i=0;i<n-1;i++){
-            for(int j=0;j<n;j++) {
-                if(i!=j)
-                if(arr[i]==2*arr[j]) return true;        
-            }
-     
+        if(l>h)return -1;
+        
+        int mid=l+(h-l)/2;
+        if(a[mid]==n)return mid;
+        else if(a[mid]>n) {
+          return   binarys(n,l,mid-1,a);
         }
-        return false;
+        else
+           return binarys(n,mid+1,h,a);
+        
     }
     
+    
+public:
+    bool checkIfExist(vector<int>& a) {
+        
+        sort(a.begin(),a.end());
+        for(int i=0;i<a.size();i++){
+             
+          int x=binarys(2*a[i],0,a.size()-1,a);
+            
+            if(i!=x and x!=-1)return true;
+            
+        }
+        return false;
+        
+    }
 };
