@@ -1,31 +1,30 @@
 class Solution {
-public:
-    int maxArea(vector<vector<int>> &a,int i, int j)
-    {
-        int count=0;
-        count++;
-        a[i][j]=0;
-        if(j-1>=0 and a[i][j-1]==1)
-            count+=maxArea(a,i,j-1);
-        if(j+1<a[i].size() and a[i][j+1]==1)
-            count+=maxArea(a,i,j+1);
-        
-        if(i-1>=0 and a[i-1][j]==1)
-            count+=maxArea(a,i-1,j);
-        if(i+1<a.size() and a[i+1][j]==1)
-            count+=maxArea(a,i+1,j);
-        return count;
+    int c=0;
+    void dfs(int i,int j,vector<vector<int>>& g,int m,int n) {
+        if(i<0 or j<0 or i>m-1 or j>n-1) {return;}
+        if(g[i][j]!=1)return ;
+        g[i][j]=2;
+        c++;
+        dfs(i+1,j,g,m,n);
+        dfs(i,j+1,g,m,n);
+        dfs(i-1,j,g,m,n);
+        dfs(i,j-1,g,m,n);
     }
-    int maxAreaOfIsland(vector<vector<int>>& grid) {
-        int maxi=0;
-        for(int i=0;i<grid.size();i++)
-        {
-            for(int j=0;j<grid[i].size();j++)
-            {
-                if(grid[i][j]==1)
-                    maxi=max(maxi,maxArea(grid,i,j));
+    
+public:
+    int maxAreaOfIsland(vector<vector<int>>& g) {
+        int mx=0;
+        int m=g.size();
+        int n=g[0].size();
+        for(int i=0;i<m;i++) {
+            for(int j=0;j<n;j++) {
+                if(g[i][j]==1) {
+                    dfs(i,j,g,m,n);
+                    mx=max(mx,c);
+                    c=0;
+                }
             }
         }
-        return maxi;
+        return mx;
     }
 };
