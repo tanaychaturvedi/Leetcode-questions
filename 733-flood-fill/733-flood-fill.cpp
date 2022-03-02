@@ -1,25 +1,22 @@
 class Solution {
-public:    
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor)
-    {
-        int val = image[sr][sc];
-        int dx[4] = {0, 0, 1, -1};
-        int dy[4] = {1, -1, 0, 0};
-        queue<pair<int,int>> q;
-        q.push({sr,sc});
-        while(!q.empty()){
-            pair<int,int> node= q.front();
-            q.pop();
-            image[node.first][node.second]=newColor;
-            for(int i=0;i<4;i++){
-                int nx=node.first+dx[i], ny=node.second+dy[i];
-                if(nx<0 or ny<0 or nx>=image.size() or ny>=image[0].size() or image[nx][ny] != val or image[nx][ny]==newColor){
-                    continue;
-                }
-                image[nx][ny]=newColor;
-                q.push({nx,ny});
-            }
-        }
-        return image;
+    
+    void solve(vector<vector<int>>& i, int sr, int sc, int c,int m,int n,int tar) {
+        
+        if(sr>m-1 or sr<0 or sc>n-1 or sc<0 or i[sr][sc]==c or i[sr][sc]!=tar)return;
+        i[sr][sc]=c;
+        solve(i,sr+1,sc,c,m,n,tar);
+        solve(i,sr,sc+1,c,m,n,tar);
+        solve(i,sr-1,sc,c,m,n,tar);
+        solve(i,sr,sc-1,c,m,n,tar);
+
+        
+    }
+    
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& i, int sr, int sc, int c) {
+        int m=i.size();
+        int n=i[0].size();
+        solve(i,sr,sc,c,m,n,i[sr][sc]);
+        return i;
     }
 };
