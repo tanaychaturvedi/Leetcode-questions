@@ -16,7 +16,7 @@ class Solution {
            {
                return true;
            }
-           if (rec[j])
+           else if (rec[j])
            {
                return true;
            }
