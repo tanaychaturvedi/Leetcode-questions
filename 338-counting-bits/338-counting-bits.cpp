@@ -1,26 +1,12 @@
 class Solution {
-    
-    int num(int x)
-    {
-        int count=0;
-        while(x)
-        {
-          if(x&1)
-              count++;
-            x=x>>1;
-        }
-        return count;
-    }
-    
 public:
     vector<int> countBits(int n) {
-        vector<int> v;
-        for(int i=0;i<=n;i++)
-        {int ans=0;
-            ans+=num(i);
-            v.push_back(ans);
+        vector<int> dp;
+        dp.push_back(0);
+        for(int i=1;i<=n;i++){
+            if(i%2==0) dp.push_back(dp[i/2]);
+            else dp.push_back(dp[i/2]+1);
         }
-        
-        return v;
+        return dp;
     }
 };
