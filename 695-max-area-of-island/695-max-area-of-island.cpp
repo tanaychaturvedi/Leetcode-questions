@@ -1,27 +1,33 @@
 class Solution {
+public:
     int c=0;
-    void dfs(int i,int j,vector<vector<int>>& g,int m,int n) {
-        if(i<0 or j<0 or i>m-1 or j>n-1) {return;}
-        if(g[i][j]!=1)return ;
-        g[i][j]=2;
+    
+    void dfs(vector<vector<int>> &grid, int m, int n, int i ,int j) {
+        if(i<0 or j<0 or i>=m or j>=n) {
+            return ;
+        }
+        if(grid[i][j]!=1)return;
+        grid[i][j]=2;
         c++;
-        dfs(i+1,j,g,m,n);
-        dfs(i,j+1,g,m,n);
-        dfs(i-1,j,g,m,n);
-        dfs(i,j-1,g,m,n);
+        dfs(grid,m,n,i+1,j);
+        dfs(grid,m,n,i-1,j);
+        dfs(grid,m,n,i,j+1);
+        dfs(grid,m,n,i,j-1);
+        
+        
+        
     }
     
-public:
-    int maxAreaOfIsland(vector<vector<int>>& g) {
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        int m=grid.size();
         int mx=0;
-        int m=g.size();
-        int n=g[0].size();
-        for(int i=0;i<m;i++) {
-            for(int j=0;j<n;j++) {
-                if(g[i][j]==1) {
-                    dfs(i,j,g,m,n);
-                    mx=max(mx,c);
-                    c=0;
+        int n=grid[0].size();
+        for(int i=0;i<grid.size();i++) {
+            for(int j=0;j<grid[0].size();j++) {
+                if(grid[i][j]==1) {
+                dfs(grid,m,n,i,j);
+                mx=max(mx,c);
+                c=0;
                 }
             }
         }
