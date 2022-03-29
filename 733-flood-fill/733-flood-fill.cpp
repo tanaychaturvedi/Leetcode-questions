@@ -1,22 +1,22 @@
 class Solution {
-    
-    void solve(vector<vector<int>>& i, int sr, int sc, int c,int m,int n,int tar) {
-        
-        if(sr>m-1 or sr<0 or sc>n-1 or sc<0 or i[sr][sc]==c or i[sr][sc]!=tar)return;
-        i[sr][sc]=c;
-        solve(i,sr+1,sc,c,m,n,tar);
-        solve(i,sr,sc+1,c,m,n,tar);
-        solve(i,sr-1,sc,c,m,n,tar);
-        solve(i,sr,sc-1,c,m,n,tar);
-
+public:
+    void dfs (vector<vector<int>>& image, int sr, int sc, int newColor, int source, int m ,int n) {
+        if(sr<0 or sr>=m or sc<0 or sc>n)return ;
+        else if(image[sr][sc]!=source)return ;
+        image[sr][sc] = newColor;
+        dfs(image,sr+1,sc,newColor,source,m,n);
+        dfs(image,sr-1,sc,newColor,source,m,n);
+        dfs(image,sr,sc+1,newColor,source,m,n);
+        dfs(image,sr,sc-1,newColor,source,m,n);
         
     }
-    
-public:
-    vector<vector<int>> floodFill(vector<vector<int>>& i, int sr, int sc, int c) {
-        int m=i.size();
-        int n=i[0].size();
-        solve(i,sr,sc,c,m,n,i[sr][sc]);
-        return i;
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        
+        if(newColor == image[sr][sc] )return  image;
+        int m=image.size();
+        int n=image[0].size();
+        int source=image[sr][sc];
+        dfs(image,sr,sc,newColor,source,m,n);
+        return image;
     }
 };
