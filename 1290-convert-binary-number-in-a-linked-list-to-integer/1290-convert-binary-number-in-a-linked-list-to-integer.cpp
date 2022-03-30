@@ -10,12 +10,11 @@
  */
 class Solution {
 public:
-	int result = 0;
-	int getDecimalValue(ListNode* head) {
-		if(head == NULL){
-			return result;
-		}
-		result = (result << 1) + head -> val;
-		return getDecimalValue(head -> next);
-	}
+    int sum=0,i=0;
+    int getDecimalValue(ListNode* head) {
+        if(!head)return 0;
+       getDecimalValue(head->next);
+        sum+=head->val*pow(2,i++);
+        return sum;
+    }
 };
