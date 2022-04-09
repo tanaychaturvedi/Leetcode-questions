@@ -18,11 +18,8 @@ public:
             {
                 v.push_back(r->val);
                 r=r->next;
-            }
-            
+            } 
         }
-       
-        
         
         sort(v.begin(),v.end());
         ListNode *t=new ListNode();
@@ -31,7 +28,6 @@ public:
             ListNode *temp=new ListNode(i);
             t->next=temp;
             t=t->next;
-        
         }
         return ans->next; 
         }
