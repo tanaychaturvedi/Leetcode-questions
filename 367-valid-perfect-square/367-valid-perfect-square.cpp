@@ -3,7 +3,7 @@ public:
     bool isPerfectSquare(int num) {
         if(num==1)return true;
         long long l=1;
-        long long h=num;
+        long long h=num/2;
         
         while(l<=h) {
             long long mid=(l+h)/2;
