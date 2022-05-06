@@ -9,7 +9,7 @@
 
 class Solution {
 public:
-    int guessNumber(int n) {
+   int guessNumber(int n) {
         int maxNumber = n, minNumber = 1;
         while (true) {
             int meanNumber = (maxNumber - minNumber) / 2 + minNumber;
